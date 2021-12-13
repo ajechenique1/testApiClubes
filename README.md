@@ -15,6 +15,8 @@ de estos registros.
 
 - [PHP](https://www.php.net/releases/8.0/en.php): Version 8.0
 - [MySQL](https://dev.mysql.com/doc/relnotes/mysql/8.0/en/): Version 8.0
+- [Sendgrid](https://sendgrid.com/) Integración para envio de correos
+- [Twilio](https://www.twilio.com/) Integración para envio de sms y whatsapp
 
 ## Instalación
 
@@ -323,3 +325,6 @@ de estos registros.
 ## Archivo Dump
 
 - En la ruta app/dump se encuentra el archivo con data de BD.
+
+## Collection Postman
+[https://go.postman.co/workspace/My-Workspace~0138fa65-e3c3-4e5e-8cce-935f1187ec63/collection/4199236-6cd97b24-377f-4d2e-9273-2b700fd6eaf3]
