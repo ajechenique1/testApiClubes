@@ -1,11 +1,28 @@
 version : '3.8'
 
 services:
+    db:
+        image: mysql:8.0
+        container_name: db_apitest_club
+        command: --default-authentication-plugin=mysql_native_password
+        ports:
+            - "3301:3306"
+        env_file:
+            - ./app/.env
+        environment:
+            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+            MYSQL_DATABASE: ${MYSQL_DATABASE}
+        networks:
+            backend-net:
+                ipv4_address: 106.0.101.3
+        volumes:
+            - ./app:/var/www
+    
     php:
         build:
           context: './docker/php'
         ports:
-            - "8092:8092"
+            - "8096:8092"
         container_name: php_apitest_club
         networks:
             backend-net:
@@ -15,35 +32,17 @@ services:
         env_file:
             - ./app/.env
         environment:
-            - MAIL_FROM=${MAIL_FROM}
+            MAIL_FROM: ${MAIL_FROM}
         links:
             - db
         depends_on:
             - db
-        #command: sh /var/www/init.sh
 
-    db:
-        image: mysql:8.0
-        container_name: db_apitest_club
-        command: --default-authentication-plugin=mysql_native_password
-        ports:
-            - "3302:3306"
-        env_file:
-            - ./app/.env
-        environment:
-            MYSQL_DATABASE: ${DB_DATABASE}
-            MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
-        networks:
-            backend-net:
-                ipv4_address: 106.0.101.3
-        volumes:
-            - ./app:/var/www
-    
     nginx:
         container_name: nginx
         image: nginx:stable-alpine
         ports:
-            - '8093:80'
+            - '8091:80'
         env_file:
             - ./app/.env
         volumes:
