@@ -8,10 +8,9 @@ use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
- * @method Entrenadores|null find($id, $lockMode = null, $lockVersion = null)
- * @method Entrenadores|null findOneBy(array $criteria, array $orderBy = null)
- * @method Entrenadores[]    findAll()
- * @method Entrenadores[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Entrenadores[]    save(array $entrenadores) 
+ * @method Entrenadores[]    update(object $entrenadores)
+ * @method Entrenadores[]    findByIdClubAndFilter(integer $clubId, string $filter, integer $currentPage = 1)
  */
 class EntrenadoresRepository extends ServiceEntityRepository
 {
@@ -50,7 +49,7 @@ class EntrenadoresRepository extends ServiceEntityRepository
         return $entrenadores;
     }
 
-    public function findByIdClubAndFilter($clubId, $filter, $currentPage = 1)
+    public function findByIdClubAndFilter($clubId, $filter)
     {
         return $this->createQueryBuilder('e')
         ->andWhere('e.name LIKE :filt')
@@ -64,33 +63,6 @@ class EntrenadoresRepository extends ServiceEntityRepository
         ->getQuery()
         ->getResult();
     }
+    
 
-    // /**
-    //  * @return Entrenadores[] Returns an array of Entrenadores objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('e.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Entrenadores
-    {
-        return $this->createQueryBuilder('e')
-            ->andWhere('e.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

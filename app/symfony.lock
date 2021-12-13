@@ -313,6 +313,21 @@
             "src/Kernel.php"
         ]
     },
+    "symfony/free-mobile-notifier": {
+        "version": "6.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "5.1",
+            "ref": "448003c0471b88be050d6d6970bab5c9b78a63b8"
+        }
+    },
+    "symfony/http-client": {
+        "version": "v6.0.1"
+    },
+    "symfony/http-client-contracts": {
+        "version": "v3.0.0"
+    },
     "symfony/http-foundation": {
         "version": "v6.0.1"
     },
@@ -342,6 +357,18 @@
     },
     "symfony/mime": {
         "version": "v6.0.1"
+    },
+    "symfony/notifier": {
+        "version": "6.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "5.0",
+            "ref": "c31585e252b32fe0e1f30b1f256af553f4a06eb9"
+        },
+        "files": [
+            "config/packages/notifier.yaml"
+        ]
     },
     "symfony/phpunit-bridge": {
         "version": "6.0",
@@ -404,6 +431,15 @@
     "symfony/service-contracts": {
         "version": "v3.0.0"
     },
+    "symfony/sms77-notifier": {
+        "version": "6.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "5.4",
+            "ref": "218301a71fa1e2b22fdce63f2021563b971e4e87"
+        }
+    },
     "symfony/stopwatch": {
         "version": "v6.0.0"
     },
@@ -412,6 +448,15 @@
     },
     "symfony/translation-contracts": {
         "version": "v3.0.0"
+    },
+    "symfony/twilio-notifier": {
+        "version": "6.0",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "5.0",
+            "ref": "eb697fe6a90b4972a4a544b4f7ea56520d29d9e9"
+        }
     },
     "symfony/validator": {
         "version": "6.0",
@@ -437,6 +482,9 @@
     },
     "theseer/tokenizer": {
         "version": "1.2.1"
+    },
+    "twilio/sdk": {
+        "version": "6.31.2"
     },
     "webmozart/assert": {
         "version": "1.10.0"

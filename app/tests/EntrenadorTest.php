@@ -24,14 +24,6 @@ class EntrenadorTest extends WebTestCase
         $this->assertEquals(JsonResponse::HTTP_CREATED, $client->getResponse()->getStatusCode());
     }
 
-    public function testGetClubEntrenadores(): void
-    {
-        $client = static::createClient();
-        $crawler = $client->request('GET', '/api/club/entrenadores/{idClub}');
-
-        $this->assertEquals(JsonResponse::HTTP_OK, $client->getResponse()->getStatusCode());
-    }
-
     public function testGetEntrenadores(): void
     {
         $client = static::createClient();

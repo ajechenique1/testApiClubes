@@ -12,6 +12,9 @@ use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Mime\Email;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Mime\Message;
+use \Twilio\Rest\Client;
+
 
 use function Symfony\Component\DependencyInjection\Loader\Configurator\env;
 
@@ -58,4 +61,68 @@ class ComunicacionController extends AbstractController
             'message' => 'ok'
         ]);
     }
+
+    public function sendMessage($arrayMail): Response
+    {
+        $sid = getenv("TWILIO_SID");
+        $token = getenv("TWILIO_TOKEN");
+        $message_sid = getenv("TWILIO_MESSAGING_SID");
+        $to = $arrayMail['phone'];
+        $from =  getenv("TWILIO_NUMBER_FROM");
+
+        $twilio = new Client($sid, $token);
+        $message = '';
+
+        if($arrayMail['alta'] == true){
+            $message = 'Hola, '.$arrayMail['name'].' nos complace informarte que has sido ingresado a la aplicacion de La LIGA.';
+        }else{
+            $message = 'Hola, '.$arrayMail['name'].' te informamos que te han dado de baja en la aplicacion de La LIGA.';
+        }
+        
+        $message = $twilio->messages 
+                        ->create($to,
+                                [ 
+                                    "from" => $from, 
+                                    "messagingServiceSid" => $message_sid,      
+                                    "body" => $message 
+                                ]
+                        ); 
+        
+        
+        return $this->json([
+            'message' => $message->sid
+        ]);
+    }
+
+    public function sendWhatsapp($arrayMail): Response
+    {
+        $sid = getenv("TWILIO_SID");
+        $token = getenv("TWILIO_TOKEN");
+        $message_sid = getenv("TWILIO_MESSAGING_SID");
+        $to = $arrayMail['phone'];
+        $from =  getenv("TWILIO_NUMBER_WS_FROM");
+
+        $twilio = new Client($sid, $token);
+        $message = '';
+
+        if($arrayMail['alta'] == true){
+            $message = 'Hola, '.$arrayMail['name'].' nos complace informarte que has sido ingresado a la aplicacion de La LIGA.';
+        }else{
+            $message = 'Hola, '.$arrayMail['name'].' te informamos que te han dado de baja en la aplicacion de La LIGA.';
+        }
+        
+        $message = $twilio->messages 
+                  ->create("whatsapp:".$to,
+                           array( 
+                               "from" => "whatsapp:".$from,       
+                               "body" => $message
+                           ) 
+                  ); 
+        
+        
+        return $this->json([
+            'message' => $message->sid
+        ]);
+    }
 }
+

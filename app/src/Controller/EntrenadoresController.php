@@ -54,6 +54,21 @@ class EntrenadoresController extends AbstractController
     {
         $dataRequest = json_decode($request->getContent(), true);
 
+        if(!filter_var($dataRequest['email'], FILTER_VALIDATE_EMAIL)){
+            return new JsonResponse([
+                'status' => 'error',
+                'message' => 'Ingrese un email correcto',
+            ], Response::HTTP_BAD_REQUEST);
+        }
+
+        $phone  = $dataRequest['code_country'].''.$dataRequest['phone'];
+        if(!preg_match("/^\+[1-9]{1}[0-9]{3,14}$/", $phone))
+        {
+            return new JsonResponse([
+                'status' => 'error',
+                'message' => 'Ingrese un número de telefono valido',
+            ], Response::HTTP_BAD_REQUEST);
+        }
         $club = null;
         if(!empty($dataRequest['club'])){
             $club = $this->clubesRepository->findOneBy(['id' => $dataRequest['club']]);
@@ -89,13 +104,22 @@ class EntrenadoresController extends AbstractController
                 'alta' => true,
                 'to' => $traineer->getEmail(),
                 'name' => $traineer->getName(),
+                'phone' => $traineer->getCodeCountry().''.$traineer->getPhone(),
                 'description' => $traineer->getDescription(),
             ];
             $this->forward('App\Controller\ComunicacionController::sendEmail',[
                 'arrayMail' => $arrayMail
             ]);
+            //Envio de SMS
+            /*$this->forward('App\Controller\ComunicacionController::sendMessage',[
+                'arrayMail' => $arrayMail
+            ]);*/
+            //Envio de Whatsapp
+            /*$this->forward('App\Controller\ComunicacionController::sendWhatsapp',[
+                'arrayMail' => $arrayMail
+            ]);*/
         }
-
+        
         return new JsonResponse(['status' => 'success', 'id' => $traineer->getId()], Response::HTTP_CREATED);
     }
 
@@ -117,36 +141,6 @@ class EntrenadoresController extends AbstractController
             'enabled' => $traineer->getEnabled(),
             'club' => (empty($traineer->getClub()))? null : $traineer->getClub()->getName()
         ];
-
-        return new JsonResponse($dataResponse, Response::HTTP_OK);
-    }
-
-    #[Route('/api/club/entrenadores/{idClub}', name: 'get_all_traineers_by_club', methods:'GET')]
-    public function getByIdClub($idClub, Request $request): JsonResponse
-    {
-        $dataRequest = json_decode($request->getContent(), true);
-        $filter = $dataRequest['filter'];
-        $page = (empty($dataRequest['page']))? 1 : $dataRequest['page'];
-        
-        $traineers = $this->entrenadoresRepository->findByIdClubAndFilter($idClub, $filter, $page);
-
-        $dataResponse = [];
-
-        foreach($traineers as $traineer){
-            $dataResponse[] = [
-                'id' => $traineer->getId(),
-                'document_number' => $traineer->getDocumentNumber(),
-                'name' => $traineer->getName(),
-                'lastname' => $traineer->getLastname(),
-                'description' => $traineer->getDescription(),
-                'email' => $traineer->getEmail(),
-                'code_country' => $traineer->getCodeCountry(),
-                'phone' => $traineer->getPhone(),
-                'salary' => $traineer->getSalary(),
-                'enabled' => $traineer->getEnabled(),
-                'club' => (empty($traineer->getClub()))? null : $traineer->getClub()->getName()
-            ];
-        }
 
         return new JsonResponse($dataResponse, Response::HTTP_OK);
     }
@@ -243,7 +237,5 @@ class EntrenadoresController extends AbstractController
 
         return new JsonResponse(['status'=>'success'], Response::HTTP_OK);
     }
-
-    
 
 }

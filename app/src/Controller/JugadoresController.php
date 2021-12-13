@@ -56,6 +56,22 @@ class JugadoresController extends AbstractController
     {
         $dataRequest = json_decode($request->getContent(), true);
 
+        if(!filter_var($dataRequest['email'], FILTER_VALIDATE_EMAIL)){
+            return new JsonResponse([
+                'status' => 'error',
+                'message' => 'Ingrese un email correcto',
+            ], Response::HTTP_BAD_REQUEST);
+        }
+
+        $phone  = $dataRequest['code_country'].''.$dataRequest['phone'];
+        if(!preg_match("/^\+[1-9]{1}[0-9]{3,14}$/", $phone))
+        {
+            return new JsonResponse([
+                'status' => 'error',
+                'message' => 'Ingrese un número de telefono valido',
+            ], Response::HTTP_BAD_REQUEST);
+        }
+
         $club = null;
         if(!empty($dataRequest['club'])){
             $club = $this->clubesRepository->findOneBy(['id' => $dataRequest['club']]);
@@ -94,11 +110,20 @@ class JugadoresController extends AbstractController
                 'to' => $player->getEmail(),
                 'name' => $player->getName(),
                 'number' => $player->getNumber(),
+                'phone' => $player->getCodeCountry().''.$player->getPhone(),
                 'position' => $player->getPosition(),
             ];
             $this->forward('App\Controller\ComunicacionController::sendEmail',[
                 'arrayMail' => $arrayMail
             ]);
+            //Envio de SMS
+            /*$this->forward('App\Controller\ComunicacionController::sendMessage',[
+                'arrayMail' => $arrayMail
+            ]);/*
+            //Envio de Whatsapp
+            /*$this->forward('App\Controller\ComunicacionController::sendWhatsapp',[
+                'arrayMail' => $arrayMail
+            ]);*/
         }
 
         return new JsonResponse(['status' => 'success', 'id' => $player->getId()], Response::HTTP_CREATED);

@@ -314,9 +314,12 @@ de estos registros.
 ```
 ## Pruebas Unitarias
 
-
 1.- Cambiar variable de entorno 'APP_ENV' en archivo .env a 'test'  
 2.- Ejecutar comando para iniciar pruebas
 ```bash
    $ docker-compose exec php /bin/sh -c "bin/phpunit"
 ```
+
+## Archivo Dump
+
+- En la ruta app/dump se encuentra el archivo con data de BD.

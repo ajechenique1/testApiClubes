@@ -9,10 +9,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
- * @method Jugadores|null find($id, $lockMode = null, $lockVersion = null)
- * @method Jugadores|null findOneBy(array $criteria, array $orderBy = null)
- * @method Jugadores[]    findAll()
- * @method Jugadores[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Jugadores[]    save(array $jugadores) 
+ * @method Jugadores[]    update(object $jugadores)
+ * @method Jugadores[]    findByIdClubAndFilter(integer $clubId, string $filter, integer $currentPage, integer $limit)
  */
 class JugadoresRepository extends ServiceEntityRepository
 {
@@ -80,11 +79,5 @@ class JugadoresRepository extends ServiceEntityRepository
 
         return $paginator;
     }
-
-    
-
-    // /**
-    //  * @return Jugadores[] Returns an array of Jugadores objects
-    //  */
     
 }

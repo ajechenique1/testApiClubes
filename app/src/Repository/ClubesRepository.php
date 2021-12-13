@@ -9,11 +9,8 @@ use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
- * @method Clubes[]    save()
- * @method Clubes|null find($id, $lockMode = null, $lockVersion = null)
- * @method Clubes|null findOneBy(array $criteria, array $orderBy = null)
- * @method Clubes[]    findAll()
- * @method Clubes[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Clubes[]    save( array $club) 
+ * @method Clubes|null update (Decimal $amountBudget)
  */
 class ClubesRepository extends ServiceEntityRepository
 {
@@ -47,50 +44,4 @@ class ClubesRepository extends ServiceEntityRepository
         return $club;
     }
 
-    /**
-    * @return Clubes[] Returns an array of a Clube objects
-    */
-    /*
-    public function findByOne($value)
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-    
-
-    // /**
-    //  * @return Clubes[] Returns an array of Clubes objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Clubes
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }
