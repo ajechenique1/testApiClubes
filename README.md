@@ -18,7 +18,7 @@ de estos registros.
 
 ## Instalación
 
-1.- Dentro de la carpeta app clonar archivo .env.example y renombrarlo .env
+1.- Dentro de la carpeta app clonar archivo .env.example y renombrarlo .env  
 2.- Ejecutar comando para construir y levantar los contenedores:
 - Al levantar los contenedores se ejecutara en el servidor el composer y los migrations.
 ```bash
@@ -42,7 +42,7 @@ de estos registros.
 1.- Crear club
 
 ### POST
-[http://localhost:8091/api/clubes]
+[http://localhost:8091/api/clubes]  
 **Parameters**
 |     Nombre | Requerido |  Tipo |Description                                                                                                                                                           |
 | -------------:|:--------:|:-------:| --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -77,7 +77,7 @@ de estos registros.
 
 ### POST
 
-[http://localhost:8091/api/jugadores]
+[http://localhost:8091/api/jugadores]  
 **Parameters**
 |     Nombre | Requerido |  Tipo |Description                                                                                                                                                           |
 | -------------:|:--------:|:-------:| --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -126,7 +126,7 @@ de estos registros.
 
 ### POST
 
-[http://localhost:8091/api/entrenadores]
+[http://localhost:8091/api/entrenadores]  
 **Parameters**
 |     Nombre | Requerido |  Tipo |Description                                                                                                                                                           |
 | -------------:|:--------:|:-------:| --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -170,7 +170,7 @@ de estos registros.
 
 ### PUT
 
-[http://localhost:8091/api/clubes/{id}]
+[http://localhost:8091/api/clubes/{id}]  
 **Parameters**
 |     Nombre | Requerido |  Tipo |Description                                                                                                                                                           |
 | -------------:|:--------:|:-------:| --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -196,7 +196,7 @@ de estos registros.
 
 ### PUT
 
-[http://localhost:8091/api/club/jugadores/delete/{id}]
+[http://localhost:8091/api/club/jugadores/delete/{id}]  
 **Parameters**
 |     Nombre | Requerido |  Tipo |Description                                                                                                                                                           |
 | -------------:|:--------:|:-------:| --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -213,7 +213,7 @@ de estos registros.
 
 ### PUT
 
-[http://localhost:8091/api/club/entrenadores/delete/{id}]
+[http://localhost:8091/api/club/entrenadores/delete/{id}]  
 **Parameters**
 |     Nombre | Requerido |  Tipo |Description                                                                                                                                                           |
 | -------------:|:--------:|:-------:| --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -230,7 +230,7 @@ de estos registros.
 
 ### GET
 
-[http://localhost:8091/api/club/jugadores/{idClub}]
+[http://localhost:8091/api/club/jugadores/{idClub}]  
 **Parameters**
 |     Nombre | Requerido |  Tipo |Description                                                                                                                                                           |
 | -------------:|:--------:|:-------:| --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -315,7 +315,7 @@ de estos registros.
 ## Pruebas Unitarias
 
 
-1.- Cambiar variable de entorno 'APP_ENV' en archivo .env a 'test'
+1.- Cambiar variable de entorno 'APP_ENV' en archivo .env a 'test'  
 2.- Ejecutar comando para iniciar pruebas
 ```bash
    $ docker-compose exec php /bin/sh -c "bin/phpunit"
